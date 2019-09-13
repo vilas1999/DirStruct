@@ -1,30 +1,19 @@
-#basic node of tree
+#Node class of tree
 class Tree:
     def __init__(self,dir):
         self.dir=dir
         self.children=[]
 
-#to add children
-def add_children(parent_root,child_dir):
-    child_root=Tree(child_dir)
-    parent_root.children.append(child_root)
-
-#to print all children
-def print_all_children(root):
-    for x in range(len(root.children)):
-        print(root.children[x].dir)
+#create and add nodes to root node
+def create_root(root):
+    name=input('Enter the name of new Directory' )
+    while check_directory_name(name):
+        name=input("Directory name cannot contain '\\' .Please renter")
+    root_dir1=root.children.append(Tree(name))
+    return root_dir1
 
 
-#checks if the children of the parent_node has the given dir
-def check_children_for_dir(parent_root,dir):
-    for x in range(len(parent_root.children)):
-        if parent_root.children[x].dir==dir:
-            return x
-    
-    print("No such ﬁle or Directory")
-    return -1
-
-#returns hirearchy in list form
+#get hirearchy
 def get_hirearchy(path):
     hirearchy=[]
     start=1
@@ -34,50 +23,92 @@ def get_hirearchy(path):
             end=x
             hirearchy.append(path[start:end])
             start=x+1
-    print (hirearchy)
     return hirearchy
 
-root = Tree("root")
-add_children(root,'child 1')
-add_children(root,'child 2')
-print_all_children(root)
+#checks if the children of the parent_node has the given dir
+def check_children_for_dir(parent_root,dir):
+    for x in range(len(parent_root.children)):
+        if parent_root.children[x].dir==dir:
+            return x
+    return -1
 
-#check_children_for_dir(root,'child')
 
-path=input("Enter the path")
-path.replace('\\','\\\\')
-print(path)
-hirearchy=get_hirearchy(path)
-
-if hirearchy[0]==root.dir:
-    print('Passed root')
-    for x in range(1,len(hirearchy)):
-        index=check_children_for_dir(root,hirearchy[x])
+#check if path exists
+def check_if_path_exists(root_node,path):
+    path.replace('\\','\\\\')
+    hirearchy_list=get_hirearchy(path)
+    for x in range(len(hirearchy_list)):
+        index=check_children_for_dir(root_node,hirearchy_list[x])
         if index>=0:
-            root=root.children[index]
+            root_node=root_node.children[index]
+        elif index==-1:
+            print ("No such directory exists")
+            return False
+    return True
 
-            
+#trverse tree along the path
+def traverse_tree(root_dir,path):
+    path.replace('\\','\\\\')
+    hirearchy=get_hirearchy(path)
+    for x in range(len(hirearchy)):
+        index=check_children_for_dir(root_dir,hirearchy[x])
+        if index>=0:
+            root_dir=root_dir.children[index]
+        else:
+            print('wvdfb')
+    return root_dir
+
+
+#to print all children
+def print_all_children(root):
+    for x in range(len(root.children)):
+        print("1",root.children[x].dir)
+
+#check for directory name
+def check_directory_name(name):
+    for x in range(len(name)):
+        if name[x]=='\\':
+            return True
+
+#to add children
+def add_children(parent_root,path):
+    child_dir=input('Enter the name of new Directory ')
+    while check_directory_name(child_dir):
+        child_dir=input("Directory name cannot contain '\\' .Please renter")
+    print(parent_root.dir,"Parent root before traversal")
+    root=traverse_tree(parent_root,path)
+    print(root.dir,"Parent root after traversal")
+    root.children.append(Tree(child_dir))
+    print("Succesfully created ",child_dir,' at ',path)
+    return parent_root
+
+#validate path
+def validate_path(path):
+    if path[0]=='\\' and path[len(path)-1=='\\']:
+        return False
+    else:
+        return True
+
+
+
+#to create directory
+def create_directory(path,root):
+    if path=='\\':
+        name=input('Enter the name of new Directory ')
+        while check_directory_name(name):
+            name=input("Directory name cannot contain '\\' .Please renter")
+        root_dir1=root.children.append(Tree(name))
+        return root_dir1
+
+    else:
+        if check_if_path_exists(root,path):
+            root=add_children(root,path)
+
+root1=Tree("main")
+while True:
+    path=input("Enter path ")
+    while validate_path(path):
+        print("No such directory exists")    
+        path=input("Enter path")
+    create_directory(path,root1)
         
-        
-
-
-        
-
-
-
-"""path=input("Enter the path")
-dir_name=input("Enter the directory name")
-
-root = Tree("root")
-add_children(root,'child 1')
-add_children(root,'child 2')
-print_all_children(root)
-
-print("Inside children")
-
-root=root.children[0]
-add_children(root,'child 11')
-add_children(root,'child 21')
-print_all_children(root)"""
-
-
