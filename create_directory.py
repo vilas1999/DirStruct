@@ -56,7 +56,7 @@ def traverse_tree(root_dir,path):
         if index>=0:
             root_dir=root_dir.children[index]
         else:
-            print('wvdfb')
+            print('Path not found')
     return root_dir
 
 
