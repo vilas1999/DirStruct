@@ -3,6 +3,7 @@ class Tree:
     def __init__(self,dir):
         self.dir=dir
         self.children=[]
+        self.files=[]
 
 #create and add nodes to root node
 def create_root(root):
@@ -62,7 +63,7 @@ def traverse_tree(root_dir,path):
 #to print all children
 def print_all_children(root):
     for x in range(len(root.children)):
-        print("1",root.children[x].dir)
+        print(root.children[x].dir)
 
 #check for directory name
 def check_directory_name(name):
@@ -75,19 +76,19 @@ def add_children(parent_root,path):
     child_dir=input('Enter the name of new Directory ')
     while check_directory_name(child_dir):
         child_dir=input("Directory name cannot contain '\\' .Please renter")
-    print(parent_root.dir,"Parent root before traversal")
     root=traverse_tree(parent_root,path)
-    print(root.dir,"Parent root after traversal")
     root.children.append(Tree(child_dir))
     print("Succesfully created ",child_dir,' at ',path)
     return parent_root
 
 #validate path
 def validate_path(path):
-    if path[0]=='\\' and path[len(path)-1=='\\']:
-        return False
-    else:
+    # print('From validation',path,path[0],path[len(path)-1])
+    if (path[0]=='\\' and path[len(path)-1]=='\\'):
         return True
+    else:
+        print("Enter path with '\\'")
+        return False
 
 
 
@@ -98,17 +99,12 @@ def create_directory(path,root):
         while check_directory_name(name):
             name=input("Directory name cannot contain '\\' .Please renter")
         root_dir1=root.children.append(Tree(name))
+        print("Succesfully created ",name,' at \\')
         return root_dir1
 
     else:
         if check_if_path_exists(root,path):
             root=add_children(root,path)
+            return root
 
-root1=Tree("main")
-while True:
-    path=input("Enter path ")
-    while validate_path(path):
-        print("No such directory exists")    
-        path=input("Enter path")
-    create_directory(path,root1)
         
