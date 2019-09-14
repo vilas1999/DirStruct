@@ -34,4 +34,12 @@
 		/run/user/1000/keyring/ssh
 #### command = search("path","file_name or directory_name")
 				Example Input = search("/","bin")
-				
+![image]tree.png
+
+# DataStructures and Algorithms
+A tree has been selected as a suiltable data structure with **parent node** containing reference of **child node** but child node doesn't have link to parent node.
+Tree resembles the Linux Directory system.
+
+
+### Tree-travesal time analysis
+The implemented algorithms takes linear time for tree-traversal for given node and path. O=t(n), where n is number of nodes in tree
