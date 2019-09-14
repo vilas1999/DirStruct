@@ -2,6 +2,8 @@ from create_directory import create_directory,Tree,validate_path
 from create_directory import print_all_children
 from list_dir import listing
 from create_file import create_file
+from check_existence import check_existence_of_directory,check_existence_of_file
+from search import search,get_path_and_string
 
 root1=Tree("main")
 '''while True:
@@ -35,7 +37,6 @@ while True:
 
     #calling create file
     elif option[0:11]=="create_file" and check_format(11,option):
-        print('create file')
         create_file(root1,option[11+2:len(option)-2])
 
      #calling listing   
@@ -44,10 +45,30 @@ while True:
             listing(root1,option[4+2:len(option)-2])
      #calling check_existence       
     elif option[0:15]=="check_existence" and check_format(15,option):
-        print('chwckl')
-
+        print('----------------------------')
+        print('For Directory:')
+        if check_existence_of_directory(root1,option[15+2:len(option)-2])==1:
+            print("True")
+        else:
+            print("False")
+        print('----------------------------')        
+        print('For File:')
+        if check_existence_of_file(root1,option[15+2:len(option)-2])==1:
+            print("True")
+        else:
+            print("False")
+        print('----------------------------')
     #calling search   
     elif option[0:6]=="search" and check_format(6,option):
-        print('search')
+        #search()
+        path,string=get_path_and_string(option[6+2:len(option)-2])
+        print('path',path)
+        print('string',string)
+        search(root1,string,path)
+        '''hierarchy=[]
+        print('Directories: ')
+        search(root1,option[6+2:len(option)-2],hierarchy)
+        print('Files: ')
+        search_file(root1,option[6+2:len(option)-2],hierarchy)'''
     else:
         print("Invalid command")
