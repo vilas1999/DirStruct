@@ -22,7 +22,7 @@ def check_format(len1,option1):
     print(option1[len1+1])
     print(option1[len(option1)-1])
     print(option1[len(option1)-2])    '''
-    if option1[len1]=='(' and option1[len(option1)-1]==')' and option1[len1+1]=='"' and option1[len(option1)-2]=='"' :
+    if option1[len1]=='(' and option1[len(option1)-1]==')' and (option1[len1+1]=='"' or option1[len1+1]=="'") and (option1[len(option1)-2]=='"' or option1[len(option1)-2]=="'"  ):
         return True
 while True:
     option=input("Enter command:")
@@ -37,7 +37,8 @@ while True:
 
     #calling create file
     elif option[0:11]=="create_file" and check_format(11,option):
-        create_file(root1,option[11+2:len(option)-2])
+        if validate_path(option[11+2:len(option)-2]):
+            create_file(root1,option[11+2:len(option)-2])
 
      #calling listing   
     elif option[0:4]=="list" and check_format(4,option):

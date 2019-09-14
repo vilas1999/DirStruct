@@ -9,7 +9,7 @@ def get_path_and_string(string):
 
 def search(root_node,str_name,path):
     hierarchy=[]
-    if path=='\\':
+    if path=='/':
         print('Directories: ')    
         search_for_dir(root_node,str_name,hierarchy)
         print('Files: ')
@@ -26,7 +26,7 @@ def search(root_node,str_name,path):
 def search_for_dir(root_node,str_name,hierarchy):
     if root_node.dir==str_name:
         for x in range(len(hierarchy)):
-            print('\\',hierarchy[x],end='')
+            print('/',hierarchy[x],end='')
         print()    
     
     for y in range(len(root_node.children)):
@@ -39,8 +39,8 @@ def search_file(root_node,str_name,hierarchy):
     for a in range(len(root_node.files)):
         if str_name==root_node.files[a]:
             for x in range(len(hierarchy)):
-                print('\\',hierarchy[x],end='')
-            print('\\',str_name)
+                print('/',hierarchy[x],end='')
+            print('/',str_name)
     for y in range(len(root_node.children)):
         hierarchy.append(root_node.children[y].dir)
         search_file(root_node.children[y],str_name,hierarchy)

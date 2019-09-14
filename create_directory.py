@@ -9,7 +9,7 @@ class Tree:
 def create_root(root):
     name=input('Enter the name of new Directory' )
     while check_directory_name(name):
-        name=input("Directory name cannot contain '\\' .Please renter")
+        name=input("Directory name cannot contain '/' .Please renter")
     root_dir1=root.children.append(Tree(name))
     return root_dir1
 
@@ -20,7 +20,7 @@ def get_hirearchy(path):
     start=1
     end=0
     for x in range(1,len(path)):
-        if (path[x] =='\\' ):
+        if (path[x] =='/' ):
             end=x
             hirearchy.append(path[start:end])
             start=x+1
@@ -36,7 +36,7 @@ def check_children_for_dir(parent_root,dir):
 
 #check if path exists
 def check_if_path_exists(root_node,path):
-    path.replace('\\','\\\\')
+    path.replace('/','//')
     hirearchy_list=get_hirearchy(path)
     for x in range(len(hirearchy_list)):
         index=check_children_for_dir(root_node,hirearchy_list[x])
@@ -49,7 +49,7 @@ def check_if_path_exists(root_node,path):
 
 #trverse tree along the path
 def traverse_tree(root_dir,path):
-    path.replace('\\','\\\\')
+    path.replace('/','//')
     hirearchy=get_hirearchy(path)
     for x in range(len(hirearchy)):
         index=check_children_for_dir(root_dir,hirearchy[x])
@@ -68,14 +68,14 @@ def print_all_children(root):
 #check for directory name
 def check_directory_name(name):
     for x in range(len(name)):
-        if name[x]=='\\':
+        if name[x]=='/':
             return True
 
 #to add children
 def add_children(parent_root,path):
     child_dir=input('Enter the name of new Directory ')
     while check_directory_name(child_dir):
-        child_dir=input("Directory name cannot contain '\\' .Please renter")
+        child_dir=input("Directory name cannot contain '/' .Please renter")
     root=traverse_tree(parent_root,path)
     root.children.append(Tree(child_dir))
     print("Succesfully created ",child_dir,' at ',path)
@@ -84,22 +84,22 @@ def add_children(parent_root,path):
 #validate path
 def validate_path(path):
     # print('From validation',path,path[0],path[len(path)-1])
-    if (path[0]=='\\' and path[len(path)-1]=='\\'):
+    if (path[0]=='/' and path[len(path)-1]=='/'):
         return True
     else:
-        print("Enter path with '\\'")
+        print("Enter path with '/'")
         return False
 
 
 
 #to create directory
 def create_directory(path,root):
-    if path=='\\':
+    if path=='/':
         name=input('Enter the name of new Directory ')
         while check_directory_name(name):
-            name=input("Directory name cannot contain '\\' .Please renter")
+            name=input("Directory name cannot contain '/' .Please renter")
         root_dir1=root.children.append(Tree(name))
-        print("Succesfully created ",name,' at \\')
+        print("Succesfully created ",name,' at /')
         return root_dir1
 
     else:
