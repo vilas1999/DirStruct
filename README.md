@@ -76,6 +76,6 @@ Enter file name: **index.html** <br/>
 Created file  index.html  at  /main/ <br/>
  
 ### Time analysis of algorithms
-The implemented algorithms takes linear time for tree-traversal for given node and path. O(n) is time complexity of insertion, where n is number of nodes in tree.
-Since Inserion of a node to a tree is a contstant time task once it is in desired node, O(n) is also the complexity of traversal.
+The implemented algorithms takes linear time for tree-traversal for given node and path. O(n) is time complexity of tree-traversal, where n is number of nodes in tree.
+Since Insertion of a node to a tree is a contstant time task once it is in desired node, O(n) is also the complexity of Insertion.
 Searching and checking existence is implemented as Recursive function whose time complexity remains as O(n)
