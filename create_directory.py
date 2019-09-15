@@ -8,7 +8,7 @@ class Tree:
 #create and add nodes to root node
 def create_root(root):
     name=input('Enter the name of new Directory' )
-    while check_directory_name(name):
+    while '/' in name:
         name=input("Directory name cannot contain '/' .Please renter")
     root_dir1=root.children.append(Tree(name))
     return root_dir1
@@ -47,6 +47,13 @@ def check_if_path_exists(root_node,path):
             return False
     return True
 
+#to print all children
+def print_all_children(root):
+    for x in range(len(root.children)):
+        print('Dir-',root.children[x].dir)
+    for y in range(len(root.files)):
+        print('File-',root.files[y])
+
 #trverse tree along the path
 def traverse_tree(root_dir,path):
     path.replace('/','//')
@@ -60,25 +67,17 @@ def traverse_tree(root_dir,path):
     return root_dir
 
 
-#to print all children
-def print_all_children(root):
-    for x in range(len(root.children)):
-        print(root.children[x].dir)
-
-#check for directory name
-def check_directory_name(name):
-    for x in range(len(name)):
-        if name[x]=='/':
-            return True
-
 #to add children
-def add_children(parent_root,path):
-    child_dir=input('Enter the name of new Directory ')
-    while check_directory_name(child_dir):
-        child_dir=input("Directory name cannot contain '/' .Please renter")
+def add(parent_root,path,flag):
+    child=input('Enter the name: ')
+    while '/' in child:
+        child=input("Name cannot contain '/' .Please renter: ")
     root=traverse_tree(parent_root,path)
-    root.children.append(Tree(child_dir))
-    print("Succesfully created ",child_dir,' at ',path)
+    if flag==0:
+        root.children.append(Tree(child))
+    elif flag==1:
+        root.files.append(child)
+    print("Succesfully created ",child,' at ',path)
     return parent_root
 
 #validate path
@@ -93,18 +92,21 @@ def validate_path(path):
 
 
 #to create directory
-def create_directory(path,root):
+def create(path,root,flag):
     if path=='/':
-        name=input('Enter the name of new Directory ')
-        while check_directory_name(name):
-            name=input("Directory name cannot contain '/' .Please renter")
-        root_dir1=root.children.append(Tree(name))
+        name=input('Enter the name')
+        while '/' in name:
+            name=input("Name cannot contain '/' .Please renter")
+        if flag==0:    
+            root_dir1=root.children.append(Tree(name))
+        elif flag==1:
+            root_dir1=root.files.append(name)
         print("Succesfully created ",name,' at /')
         return root_dir1
 
     else:
         if check_if_path_exists(root,path):
-            root=add_children(root,path)
+            root=add(root,path,flag)
             return root
 
         
