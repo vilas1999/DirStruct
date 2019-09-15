@@ -4,15 +4,6 @@ class Tree:
         self.children=[]
         self.files=[]
 
-#create and add nodes to root node
-def create_root(root):
-    name=input('Enter the name of new Directory' )
-    while '/' in name:
-        name=input("Directory name cannot contain '/' .Please renter")
-    root_dir1=root.children.append(Tree(name))
-    return root_dir1
-
-
 #get hirearchy
 def get_hirearchy(path):
     hirearchy=[]
@@ -34,7 +25,7 @@ def check_children_for_dir(parent_root,dir):
 
 
 #check if path exists
-def check_if_path_exists(root_node,path):
+def check_if_path_exists_and_traverse(root_node,path):
     path.replace('/','//')
     hirearchy_list=get_hirearchy(path)
     for x in range(len(hirearchy_list)):
@@ -43,29 +34,18 @@ def check_if_path_exists(root_node,path):
             root_node=root_node.children[index]
         elif index==-1:
             print ("No such directory exists")
-            return False
-    return True
-
-
-#trverse tree along the path
-def traverse_tree(root_dir,path):
-    path.replace('/','//')
-    hirearchy=get_hirearchy(path)
-    for x in range(len(hirearchy)):
-        index=check_children_for_dir(root_dir,hirearchy[x])
-        if index>=0:
-            root_dir=root_dir.children[index]
-    return root_dir
-
+            return (False,root_node)
+    return (True,root_node)
 
 
 #to create directory
 def create(path,root,flag):
-    if check_if_path_exists(root,path):
+    bool1,node1=check_if_path_exists_and_traverse(root,path)
+    if bool1:
         child=input('Enter the name: ')
         while '/' in child:
             child=input("Name cannot contain '/' .Please renter: ")
-        root=traverse_tree(root,path)
+        bool2,root=check_if_path_exists_and_traverse(root,path)
         if flag==0:
             root.children.append(Tree(child))
         elif flag==1:

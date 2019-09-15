@@ -1,4 +1,4 @@
-from create_directory import create,get_hirearchy,Tree,check_if_path_exists,traverse_tree
+from create_directory import create,get_hirearchy,Tree,check_if_path_exists_and_traverse
 
 root1=Tree("main")
 
@@ -33,8 +33,9 @@ def check_existence_of_directory(root,directory1):
 
 #listing     
 def listing(node,path):
-    if check_if_path_exists(node,path):
-        root_dir1=traverse_tree(node,path)
+    bool2,root1=check_if_path_exists_and_traverse(node,path)
+    if bool2:
+        boo1,root_dir1=check_if_path_exists_and_traverse(node,path)
         print('----------------------------')
         for x in range(len(root_dir1.children)):
             print('Dir-',root_dir1.children[x].dir)
@@ -107,7 +108,7 @@ while True:
         hieararchy=get_hirearchy(path)        
         if path == "-1" and string == "-1":
             print("Invalid command")
-        elif validate_path(path) and check_if_path_exists(root1,path) :
+        elif validate_path(path) and check_if_path_exists_and_traverse(root1,path) :
             search_dir(root1,string,hieararchy)
         
     
