@@ -5,6 +5,7 @@ def get_path_and_string(string):
     for x in range(len(string)):
         if string[x]==',':
             return (string[0:x-1],string[x+2:])
+    return (str(-1),str(-1))
 
 
 def search(root_node,str_name,path):
@@ -17,8 +18,10 @@ def search(root_node,str_name,path):
     else:
         root=traverse_tree(root_node,path)
         hierarchy=get_hirearchy(path)
+        print("---------------------------------------------------")        
         print('Directories: ')    
         search_for_dir(root,str_name,hierarchy)
+        print("---------------------------------------------------")
         print('Files: ')
         search_file(root,str_name,hierarchy)
 

@@ -4,6 +4,7 @@ from list_dir import listing
 from create_file import create_file
 from check_existence import check_existence_of_directory,check_existence_of_file
 from search import search,get_path_and_string
+from create_directory import check_if_path_exists
 
 root1=Tree("main")
 '''while True:
@@ -44,6 +45,8 @@ while True:
     elif option[0:4]=="list" and check_format(4,option):
         if validate_path(option[4+2:len(option)-2]):
             listing(root1,option[4+2:len(option)-2])
+    
+    
      #calling check_existence       
     elif option[0:15]=="check_existence" and check_format(15,option):
         print('----------------------------')
@@ -59,17 +62,27 @@ while True:
         else:
             print("False")
         print('----------------------------')
+
+
     #calling search   
     elif option[0:6]=="search" and check_format(6,option):
         #search()
+        
         path,string=get_path_and_string(option[6+2:len(option)-2])
-        print('path',path)
-        print('string',string)
-        search(root1,string,path)
-        '''hierarchy=[]
-        print('Directories: ')
-        search(root1,option[6+2:len(option)-2],hierarchy)
-        print('Files: ')
-        search_file(root1,option[6+2:len(option)-2],hierarchy)'''
+        if path == "-1" and string == "-1":
+            print("Invalid command")
+        elif validate_path(path) and check_if_path_exists(root1,path) :
+            search(root1,string,path)
+        
+    
     else:
         print("Invalid command")
+        print("---------------------------------------------------")
+        print("Enter any of the following commands in specified format:")
+        print("1) create_directory(\"path\")")
+        print("  Note: Enter path as / if creating under main directory")
+        print("2) create_file(\"path\")")
+        print("3) list(\"path\")")
+        print("4) check_existence(\"file_name or directory\")")
+        print("5) search(\"path\",\"search_string\")")
+        print("---------------------------------------------------")
