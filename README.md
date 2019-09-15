@@ -2,6 +2,8 @@
  Implement a directory structure for a Linux Based operang System. You are not suppose to create actual ﬁles or directories. You should only give the implementaon of the Directory Structure like how would a directory Structure look if I create a Directory. I will give you the output in detail. You can assume that there exist no Directory Structure in the beginning
  
  Following tasks are implemented by the python scripts in the repositry.
+### Implementation
+The above program can will work on compiling **main.py**. On running main.py it enters an infinite loop to which the following commands can be given.
  
  ### Please note that the main directory starts as '/'. Enter path as '/' while creating root directory 
  ## 1. Create a Directory 
@@ -40,7 +42,38 @@ A tree has been selected as a suiltable data structure with **parent node** cont
 Tree resembles the Linux Directory system.
 
 ![image](tree.png)
- Sample Tree
+
+ ### Sample commands to create above shown tree
+ Enter command: **create_directory("/")**  <br/>
+Enter the name of new Directory **root** <br/>
+Succesfully created  root  at / <br/>
+Enter command:**create_directory("/")** <br/>
+Enter the name of new Directory **main** <br/>
+Succesfully created  main  at / <br/>
+Enter command:**create_file("/root/")** <br/>
+Enter file name: **a.py** <br/>
+Created file  a.py  at  /root/ <br/>
+Enter command:**create_directory("/root/")** <br/>
+Enter the name of new Directory **bin** <br/>
+Succesfully created  bin  at  /root/ <br/>
+Enter command:**create_directory("/root/")** <br/>
+Enter the name of new Directory **sys** <br/>
+Succesfully created  sys  at  /root/ <br/>
+Enter command:**create_directory("/root/bin/")** <br/>
+Enter the name of new Directory **docs** <br/>
+Succesfully created  docs  at  /root/bin/ <br/>
+Enter command:**create_directory("/root/sys/")** <br/>
+Enter the name of new Directory **usr** <br/>
+Succesfully created  usr  at  /root/sys/ <br/>
+Enter command:**create_directory("/main/")** <br/>
+Enter the name of new Directory **opt** <br/>
+Succesfully created  opt  at  /main/ <br/>
+Enter command:**create_file("/main/")** <br/>
+Enter file name: **b.py** <br/>
+Created file  b.py  at  /main/ <br/>
+Enter command:**create_file("/main/")** <br/>
+Enter file name: **index.html** <br/>
+Created file  index.html  at  /main/ <br/>
  
 ### Time analysis of algorithms
 The implemented algorithms takes linear time for tree-traversal for given node and path. O(n) is time complexity of insertion, where n is number of nodes in tree.
