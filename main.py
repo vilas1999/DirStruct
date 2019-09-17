@@ -14,11 +14,13 @@ def get_path_and_string(string):
 while True:
     option=input("Enter command")
     if option[0:16]=="create_directory":
-        tree.create_dir(option[18:-2],0)
+        print(tree.create_dir(option[18:-2]))
     elif option[0:11]=="create_file":
-        tree.create_dir(option[13:-2],1)
+        print(tree.create_file(option[13:-2]))
     elif option[0:4]=="list" :
-        tree.listing(option[6:-2])
+        list_final=tree.listing(option[6:-2])
+        for x in range(len(list_final)):
+            print(list_final[x].value)
     elif option[0:15]=="check_existence":
         if tree.check_existence_of_directory(Tree.root,option[17:-2]):
             print(str(True))
@@ -26,7 +28,7 @@ while True:
             print(str(False))
     elif option[0:6]=="search":
         path,string=get_path_and_string(option[8:-2])
-        hiearchy=tree.get_hirearchy(path)
+        hiearchy=path.split("/")[1:-1]
         bool3,root3=tree.check_if_path_exists_and_traverse(Tree.root,hiearchy)
         if bool3:
             tree.search_dir(root3,string,hiearchy)
