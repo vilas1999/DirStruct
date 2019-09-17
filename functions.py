@@ -7,13 +7,22 @@ class Tree:
         self.children=[]
     
 
+
+    def check_children_for_dir(self,parent_root,dir):
+        for x in range(len(parent_root.children)):
+            if parent_root.children[x].value==dir and parent_root.children[x].kind==0:
+                return x
+        return -1
+
     def check_if_path_exists_and_traverse(self,root_node,hirearchy_list):
         for x in range(len(hirearchy_list)):
-            if hirearchy_list[x] in [l.value for l in root_node.children] and root_node.children[x].kind==0:
-                root_node=root_node.children[x]
-            else:
-                return (False,root_node)
-        return (True,root_node)
+            index=self.check_children_for_dir(root_node,hirearchy_list[x])
+            if index>=0:
+                root_node=root_node.children[index]
+            elif index==-1:
+                return [False,root_node]
+                
+        return (True,root_node)       
 
     def create_dir(self,path1):
         main_root=self.root
@@ -43,7 +52,7 @@ class Tree:
         hierarchy2=path.split("/")[1:-1]
         bool2,root1=self.check_if_path_exists_and_traverse(node,hierarchy2)
         if bool2:
-            return root1.child
+            return root1.children
     
     def check_existence_of_directory(self,root,directory1):
         if root.value==directory1:
